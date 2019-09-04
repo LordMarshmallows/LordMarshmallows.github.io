@@ -1,5 +1,5 @@
 (function(){
-var audio, play, src, arr, context, positionX=3,bottom=1050,bitLenght=3.8,widthLine=10,
+var audio, play,helmet, src, arr, context, positionX=3,bottom=1050,bitLenght=3.8,widthLine=10,
 
 circles=[];
 var canvas = document.createElement('canvas'),
@@ -8,10 +8,11 @@ var canvas = document.createElement('canvas'),
     w = canvas.width = innerWidth,
     h = canvas.height = innerHeight,
 audio=document.getElementById("audio");
-play=document.getElementById("play");
+play=document.getElementById("helmet");
+
 var gradient = ctx.createLinearGradient(0, 0, 0, bottom);
 gradient.addColorStop("0", 'rgb(255,22,130,1)');
-
+helmet=document.getElementById("helmet").style;
 gradient.addColorStop("1", 'rgba(255,22,130,0)');
 document.querySelector('body').appendChild(canvas);
 
@@ -29,7 +30,7 @@ class Circle{
         positionX=positionX+widthLine*2;
     }
     draw(){
-    
+   
     ctx.lineWidth = widthLine;
     ctx.strokeStyle =  gradient;
     ctx.beginPath();
@@ -37,10 +38,7 @@ class Circle{
     ctx.lineTo(this.x,this.y);
     ctx.closePath();
     ctx.stroke();
-    /*ctx.arc(this.x,this.y,5,0,Math.PI*2,);
-    ctx.closePath();
-    ctx.fillStyle='rgb(255,22,130)';
-    ctx.fill();*/
+
     
     }
 }
@@ -53,11 +51,12 @@ play.onclick=function(){
         audio.play();
         
         loop();
-        play.src="image/faceStop.png";
+        play.src="image/helmetStop.png";
        
     }else{
         audio.pause();
-        play.src="image/facePlay.png";
+        play.src="image/helmetPlay.png";
+       
         loop();
     }
 }
@@ -77,7 +76,8 @@ function preparation(){
 
     function loop(){
         if(audio.ended){
-            
+            audio.src="musik/1.mp3";
+            audio.play();
         }
         if(!audio.paused){
             window.requestAnimationFrame(loop);
@@ -88,35 +88,13 @@ function preparation(){
         for(var i in circles){
             circles[i].y=bottom-arr[i]*bitLenght;
             circles[i].draw();
+            if(arr[40]>70){
+            helmet.height=(arr[40]/6)+"%";
+            helmet.width=window.width/100*(arr[40]/9);
+            helmet.left
         }
-       /* arr = new Uint8Array(analyser.frequencyBinCount);
-        analyser.getByteFrequencyData(arr);
-        
-        if (canvas.getContext){
-           
-            
-            ctx.lineWidth = '2';
-            ctx.strokeStyle = 'rgba(255, 40, 40, '+100+')';
-            ctx.filter = "none";
-            let x=0;
-            ctx.beginPath();
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for(let i=0;i<1200;i+=10){
-                
-           
-            
-            
-            ctx.arc(i,1050-arr[x]*3.3,3.5,0,Math.PI*2,true); 
-            ctx.moveTo(i,1050-arr[x]*3.3);
-          
-           
-           
-            
-            x++;
         }
-        ctx.closePath();
-        ctx.stroke();*/
-        
+      
        
     }
     function initialization(){
@@ -128,41 +106,11 @@ function preparation(){
         gradient.addColorStop("0", 'rgb(255,22,130,1)');
         gradient.addColorStop("1", 'rgba(255,22,130,0)');
         bitLenght=document.documentElement.clientHeight/284,2105;
-        for(var i = 0 ; i < 96 ; i++){
+        for(var i = 0 ; i < 100 ; i++){
             circles.push(new Circle);
         circles[i].draw();
     }
     }
-    function init(){
-        initialization();
-        
-      
-       
- 
- 
-       
-        
-
-        
-    }
-
-    init();
+        initialization();     
    
 }())
-
-
-
-
-/*for(let i=0;i<1200;i+=10){
-                
-    ctx.lineWidth = '2';
-    ctx.strokeStyle = 'rgba(255, 40, 40, '+100+')';
-    ctx.filter = "none";
-    ctx.beginPath();
-    
-    ctx.arc(i,1050-arr[x]*3.3,3.5,0,Math.PI*2,true); 
-    
-  
-    ctx.closePath();
-   
-    ctx.stroke();*/
